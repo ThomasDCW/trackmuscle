@@ -1,6 +1,9 @@
-import { cookies } from "next/headers";
-import { PrismaClient } from "@prisma/client";
-import { redirect } from "next/navigation";
+import { cookies } from 'next/headers';
+import { PrismaClient } from '@prisma/client';
+import { redirect } from 'next/navigation';
+import { Button } from '@/components/ui/button';
+import { MdAddCircleOutline } from 'react-icons/md';
+import Link from 'next/link';
 
 const prisma = new PrismaClient();
 
@@ -14,16 +17,16 @@ async function getUserData(username: string) {
     });
     return user;
   } catch (error) {
-    console.error("Error retrieving user data:", error);
+    console.error('Error retrieving user data:', error);
     return null;
   }
 }
 
 export default async function DashboardPage() {
-  const username = cookies().get("username")?.value;
+  const username = cookies().get('username')?.value;
 
   if (!username) {
-    redirect("/");
+    redirect('/');
     return null;
   }
 
@@ -34,7 +37,13 @@ export default async function DashboardPage() {
   }
 
   return (
-    <main className="w-screen h-screen flex flex-col p-2">
+    <main className="flex h-screen w-screen flex-col p-2">
+      <Link
+        href={'/dashboard/add-training'}
+        className="mx-auto my-4 flex w-2/3 items-center justify-center gap-2 rounded-md bg-primary p-2 text-white"
+      >
+        Ajouter un entrainement <MdAddCircleOutline size={20} />
+      </Link>
       <div>
         <span className="text-xl">Mes entrainements:</span>
         <ul>

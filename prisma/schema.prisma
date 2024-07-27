@@ -10,20 +10,19 @@ datasource db {
 model User {
   id        Int        @id @default(autoincrement())
   name      String?    @unique
-  trainings Training[] 
+  trainings Training[]
 }
 
 model Training {
-  id     Int    @id @default(autoincrement())
-  name   String
-  userId Int
-  user   User   @relation(fields: [userId], references: [id])
-  exerciseId Int
-  exercise Exercise @relation(fields: [exerciseId], references: [id])
+  id          Int        @id @default(autoincrement())
+  name        String
+  userId      Int
+  user        User       @relation(fields: [userId], references: [id])
+  exercises   Exercise[] @relation("TrainingExercises")
 }
 
 model Exercise {
-  id        Int        @id @default(autoincrement())
-  name      String
-  trainings Training[] 
+  id          Int        @id @default(autoincrement())
+  name        String     @unique
+  trainings   Training[] @relation("TrainingExercises")
 }
