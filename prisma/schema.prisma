@@ -18,4 +18,12 @@ model Training {
   name   String
   userId Int
   user   User   @relation(fields: [userId], references: [id])
+  exerciseId Int
+  exercise Exercise @relation(fields: [exerciseId], references: [id])
+}
+
+model Exercise {
+  id        Int        @id @default(autoincrement())
+  name      String
+  trainings Training[] 
 }

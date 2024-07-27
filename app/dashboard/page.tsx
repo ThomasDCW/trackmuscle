@@ -35,10 +35,9 @@ export default async function DashboardPage() {
   }
 
   return (
-    <main className="w-screen h-screen flex flex-col items-center justify-center">
-      <h1 className="text-2xl mb-4">Welcome, {userData.name}</h1>
+    <main className="w-screen h-screen flex flex-col p-2">
       <div>
-        <h2 className="text-xl">Your Trainings:</h2>
+        <h2 className="text-xl">Mes entrainements:</h2>
         <ul>
           {userData.trainings.map((training) => (
             <li key={training.id}>{training.name}</li>
