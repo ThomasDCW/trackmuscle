@@ -12,7 +12,6 @@ async function getUserData(username: string) {
         trainings: true,
       },
     });
-
     return user;
   } catch (error) {
     console.error("Error retrieving user data:", error);
@@ -37,7 +36,7 @@ export default async function DashboardPage() {
   return (
     <main className="w-screen h-screen flex flex-col p-2">
       <div>
-        <h2 className="text-xl">Mes entrainements:</h2>
+        <span className="text-xl">Mes entrainements:</span>
         <ul>
           {userData.trainings.map((training) => (
             <li key={training.id}>{training.name}</li>
