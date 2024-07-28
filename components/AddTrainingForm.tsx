@@ -7,6 +7,7 @@ import { Input } from '@/components/ui/input';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Exercise } from '@prisma/client';
 import { useRouter } from 'next/navigation';
+import { FaDumbbell } from 'react-icons/fa6';
 
 interface AddTrainingFormProps {
   exercises: Exercise[];
@@ -55,34 +56,36 @@ export default function AddTrainingForm({ exercises }: AddTrainingFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+    <form onSubmit={handleSubmit} className="flex flex-col gap-2">
+      <label htmlFor="trainingName" className="font-semibold">
+        Nom :
+      </label>
       <Input
+        required
         className="w-full"
-        placeholder="Nom de l'entraînement"
+        placeholder="Full body, 3 jours..."
         value={trainingName}
         onChange={(e) => setTrainingName(e.target.value)}
       />
       <div className="flex flex-col gap-2">
-        <span className="text-xl font-semibold">Exercices :</span>
+        <span className="font-semibold">Exercices :</span>
         {exercises.map((exercise) => (
           <div key={exercise.id} className="flex items-center space-x-2">
             <Checkbox
-              className="h-6 w-6"
+              className="h-5 w-5"
               id={`checkbox-${exercise.id}`}
               checked={selectedExercises.includes(exercise.id)}
               onClick={() => handleCheckboxChange(exercise.id)}
             />
-            <label htmlFor={`checkbox-${exercise.id}`} className="text-lg">
+            <label htmlFor={`checkbox-${exercise.id}`} className="">
               {exercise.name}
             </label>
           </div>
         ))}
       </div>
-      <Button
-        type="submit"
-        className="mx-auto flex w-2/3 items-center justify-center gap-2 rounded-md bg-primary p-2 text-white"
-      >
-        Valider
+      <Button type="submit" className="flex items-center justify-center gap-2 rounded-md p-2">
+        <FaDumbbell />
+        Créer le workout
       </Button>
     </form>
   );
