@@ -63,15 +63,16 @@ export default function AddTrainingForm({ exercises }: AddTrainingFormProps) {
         onChange={(e) => setTrainingName(e.target.value)}
       />
       <div className="flex flex-col gap-2">
-        <span className="text-lg">Exercices disponibles:</span>
+        <span className="text-xl font-semibold">Exercices :</span>
         {exercises.map((exercise) => (
           <div key={exercise.id} className="flex items-center space-x-2">
             <Checkbox
+              className="h-6 w-6"
               id={`checkbox-${exercise.id}`}
               checked={selectedExercises.includes(exercise.id)}
               onClick={() => handleCheckboxChange(exercise.id)}
             />
-            <label htmlFor={`checkbox-${exercise.id}`} className="text-sm font-medium">
+            <label htmlFor={`checkbox-${exercise.id}`} className="text-lg">
               {exercise.name}
             </label>
           </div>
