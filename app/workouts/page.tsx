@@ -23,7 +23,7 @@ async function getUserData(username: string) {
     const user = await prisma.user.findUnique({
       where: { name: username },
       include: {
-        trainings: true,
+        workouts: true,
       },
     });
     return user;
@@ -33,7 +33,7 @@ async function getUserData(username: string) {
   }
 }
 
-export default async function DashboardPage() {
+export default async function workoutsPage() {
   const username = cookies().get('username')?.value;
 
   if (!username) {
@@ -68,24 +68,24 @@ export default async function DashboardPage() {
         </BreadcrumbList>
       </Breadcrumb>
       <Link
-        href={'/dashboard/add-training'}
+        href={'/workouts/add-workout'}
         className="flex items-center justify-center gap-2 rounded-md bg-primary p-2 text-primary-foreground hover:bg-primary/90"
       >
         <FaDumbbell />
         Créer un workout
       </Link>
       <div className="flex flex-col gap-2">
-        {userData.trainings.map((training) => (
+        {userData.workouts.map((workout) => (
           <Card
             className="flex items-center justify-between border border-input bg-background hover:bg-accent hover:text-accent-foreground"
-            key={training.id}
+            key={workout.id}
           >
             <CardHeader>
-              <CardTitle className="text-lg">{training.name}</CardTitle>
+              <CardTitle className="text-lg">{workout.name}</CardTitle>
             </CardHeader>
             <Link
               className="mr-4 rounded-md bg-primary p-3 text-primary-foreground hover:bg-primary/90"
-              href={`/dashboard/training/${training.id}`}
+              href={`/workouts/workout/${workout.id}`}
             >
               <FaArrowRight />
             </Link>

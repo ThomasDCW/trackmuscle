@@ -8,21 +8,21 @@ datasource db {
 }
 
 model User {
-  id        Int        @id @default(autoincrement())
+  id        String     @id @default(uuid())
   name      String?    @unique
-  trainings Training[]
+  workouts  Workout[]
 }
 
-model Training {
-  id          Int        @id @default(autoincrement())
-  name        String
-  userId      Int
-  user        User       @relation(fields: [userId], references: [id])
-  exercises   Exercise[] @relation("TrainingExercises")
+model Workout {
+  id        String     @id @default(uuid())
+  name      String
+  userId    String
+  user      User       @relation(fields: [userId], references: [id])
+  exercises Exercise[] @relation("WorkoutExercises")
 }
 
 model Exercise {
-  id          Int        @id @default(autoincrement())
-  name        String     @unique
-  trainings   Training[] @relation("TrainingExercises")
+  id        String     @id @default(uuid())
+  name      String     @unique
+  workouts  Workout[]  @relation("WorkoutExercises")
 }

@@ -15,7 +15,7 @@ interface AddTrainingFormProps {
 
 export default function AddTrainingForm({ exercises }: AddTrainingFormProps) {
   const [trainingName, setTrainingName] = useState('');
-  const [selectedExercises, setSelectedExercises] = useState<number[]>([]);
+  const [selectedExercises, setSelectedExercises] = useState<string[]>([]);
   console.log(selectedExercises);
 
   const router = useRouter();
@@ -23,7 +23,7 @@ export default function AddTrainingForm({ exercises }: AddTrainingFormProps) {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      const response = await fetch('/api/training', {
+      const response = await fetch('/api/workout', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ export default function AddTrainingForm({ exercises }: AddTrainingFormProps) {
         body: JSON.stringify({
           name: trainingName,
           exerciseIds: selectedExercises,
-          userId: 1,
+          userId: 'c24c3f28-a840-4be0-9efd-de8efc95567b',
         }),
       });
       if (!response.ok) {
@@ -41,13 +41,13 @@ export default function AddTrainingForm({ exercises }: AddTrainingFormProps) {
       const result = await response.json();
       console.log('Training created:', result);
 
-      router.push('/dashboard');
+      router.push('/workouts');
     } catch (error) {
       console.error('Error creating training:', error);
     }
   };
 
-  const handleCheckboxChange = (id: number) => {
+  const handleCheckboxChange = (id: string) => {
     console.log('checked', id);
 
     setSelectedExercises((prev) =>

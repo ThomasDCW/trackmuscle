@@ -39,7 +39,7 @@ export default async function AddTrainingPage() {
             <Slash />
           </BreadcrumbSeparator>
           <BreadcrumbItem>
-            <BreadcrumbLink className="flex items-center gap-2" href="/dashboard">
+            <BreadcrumbLink className="flex items-center gap-2" href="/workouts">
               <FaDumbbell />
               Workouts
             </BreadcrumbLink>

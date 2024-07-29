@@ -1,32 +1,26 @@
 // app/api/user/[name]/route.ts
-import { NextResponse } from "next/server";
-import { PrismaClient } from "@prisma/client";
+import { NextResponse } from 'next/server';
+import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export async function GET(
-  request: Request,
-  { params }: { params: { name: string } }
-) {
+export async function GET(request: Request, { params }: { params: { name: string } }) {
   const { name } = params;
 
   try {
     const user = await prisma.user.findUnique({
       where: { name },
       include: {
-        trainings: true,
+        workouts: true,
       },
     });
 
     if (!user) {
-      return NextResponse.json({ error: "User not found" }, { status: 404 });
+      return NextResponse.json({ error: 'User not found' }, { status: 404 });
     }
 
     return NextResponse.json(user, { status: 200 });
   } catch (error) {
-    return NextResponse.json(
-      { error: "Error retrieving user data" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: 'Error retrieving user data' }, { status: 500 });
   }
 }

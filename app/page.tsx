@@ -28,7 +28,7 @@ export default function Home() {
         title: 'Bienvenue sur Muscle up',
         description: user.name,
       });
-      router.push('/dashboard');
+      router.push('/workouts');
     } else {
       toast({
         description: "Nom d'utilisateur incorrect",
